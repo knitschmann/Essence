@@ -6,7 +6,8 @@ Essence is a compact, beautiful, and minimalistic theme for the Firefox web brow
 
 ## Screenshots
 
-![Essence](https://github.com/knitschmann/Essence/assets/92025751/4ec61b5b-52b5-4e89-b0ca-b4de041cb01c)
+![Tabs on the Right](https://github.com/knitschmann/Essence/blob/753219e21b746418f88ace1d5520ad0f07d1a784/tabs-right.jpg)
+![Tabs on the Left](https://github.com/knitschmann/Essence/blob/753219e21b746418f88ace1d5520ad0f07d1a784/tabs-left.jpg)
 
 ## Installation
 
