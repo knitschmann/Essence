@@ -2,7 +2,9 @@
 
 ## Short description
 
-Essence is a compact, beautiful, and minimalistic theme for the Firefox web browser. The main goal was to minify a toolbar, so more content would be displayed in the browser.
+Essence is a compact, beautiful, and minimalistic one-liner theme for the Firefox web browser. The main goal was to minify a toolbar, so more content would be displayed in the browser.
+
+Firefox Containers feature a colorful glow on each tab.
 
 ## Screenshots
 
