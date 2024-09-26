@@ -3,7 +3,6 @@
   display: none !important;
 }
 
-
 urlbar-container,
 .urlbar-input-box {
   border: none !important;
@@ -46,7 +45,7 @@ font-size: 8pt !important;
 }*/
 
 /* Hide Page back and foward buttons*/
-/* #back-button,*/
+/*#back-button,*/
 #forward-button
 {
   display: none !important
@@ -89,23 +88,138 @@ font-size: 8pt !important;
   padding-inline: 0 !important;
 }
 
-/* Navbar size calc */
-:root{
---3tab-border-radius: 6px !important; /*  Tab border radius -- Changes the tabs rounding  *//*  Default: 6px  */
---NavbarWidth: 20; /*  Default values: 36 - 43  */
---TabsHeight: 30; /*  Minimum: 30  *//*  Default: 36  */
---TabsBorder: 8; /*  Doesnt do anything on small layout  *//*  Default: 8  */
---NavbarHeightSmall: calc(var(--TabsHeight) + var(--TabsBorder))  /*  Only on small layout  *//*  Default: calc(var(--TabsHeight) + var(--TabsBorder))  *//*  Default as a number: 44  */}
 
-@media screen and (min-width:1325px)    /*  Only the tabs space will grow from here  */
-{:root #nav-bar{margin-top: calc(var(--TabsHeight) * -1px - var(--TabsBorder) * 1px)!important; height: calc(var(--TabsHeight) * 1px + var(--TabsBorder) * 1px)} #TabsToolbar{margin-left: calc(1325px / 100 * var(--NavbarWidth)) !important} #nav-bar{margin-right: calc(100vw - calc(1325px / 100 * var(--NavbarWidth))) !important; vertical-align: center !important} #urlbar-container{min-width: 0px !important;  flex: auto !important} toolbarspring{display: none !important}}
 
-@media screen and (min-width:950px) and (max-width:1324px)    /*  Both the tabs space and the navbar will grow  */
-{:root #nav-bar{margin-top: calc(var(--TabsHeight) * -1px - var(--TabsBorder) * 1px) !important; height: calc(var(--TabsHeight) * 1px + var(--TabsBorder) * 1px)} #TabsToolbar{margin-left: calc(var(--NavbarWidth) * 1vw) !important} #nav-bar{margin-right: calc(100vw - calc(var(--NavbarWidth) * 1vw)) !important; vertical-align: center !important} #urlbar-container{min-width: 0px !important;  flex: auto !important} toolbarspring{display: none !important} #TabsToolbar, #nav-bar{transition: margin-top .25s !important}}
 
-@media screen and (max-width:949px)    /*  The window is not enough wide for a one line layout */
-{:root #nav-bar{padding: 0 5px 0 5px!important; height: calc(var(--NavbarHeightSmall) * 1px) !important} toolbarspring{display: none !important;} #TabsToolbar, #nav-bar{transition: margin-top .25s !important}}
-#nav-bar, #PersonalToolbar{background-color: #0000 !important;background-image: none !important; box-shadow: none !important} #nav-bar{margin-left: 3px;} .tab-background, .tab-stack { min-height: calc(var(--TabsHeight) * 1px) !important}
+
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/navbar_tabs_oneliner_tabs_on_left.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/*Make tabs and navbar appear side-by-side tabs on left */
+
+/* IMPORTANT */
+/*
+Get window_control_placeholder_support.css
+Window controls will be all wrong without it
+*/
+
+:root[uidensity="compact"]{
+  --tab-block-margin: 2px !important;
+  }
+
+/* Modify these to change relative widths or default height */
+#navigator-toolbox{
+  --uc-navigationbar-width: 30vw;
+  --uc-toolbar-height: 40px;
+  --uc-urlbar-min-width: 50vw; /* minimum width for opened urlbar */
+}
+#titlebar{
+  will-change: unset !important;
+  transition: none !important;
+  opacity: 1 !important;
+}
+#scrollbutton-up,
+#scrollbutton-down{ border-block-width: 2px !important; }
+
+/* Override for other densities */
+:root[uidensity="compact"] #navigator-toolbox{ --uc-toolbar-height: 34px;}
+:root[uidensity="touch"] #navigator-toolbox{ --uc-toolbar-height: 44px; }
+
+:root[uidensity="compact"] #urlbar-container{
+  --urlbar-container-height: var(--uc-toolbar-height) !important;
+  padding-block: 0 !important;
+}
+:root[uidensity="compact"] #urlbar{
+  --urlbar-container-height: var(--uc-toolbar-height) !important;
+}
+
+/* prevent urlbar overflow on narrow windows */
+/* Dependent on how many items are in navigation toolbar and tabs-/nav-bar ratio - ADJUST AS NEEDED */
+@media screen and (max-width: 1600px){
+  #urlbar-container{ min-width:unset !important }
+}
+
+:root[tabsintitlebar] #toolbar-menubar{
+  height: initial !important;
+}
+:root[tabsintitlebar] #toolbar-menubar[inactive] > :not(.titlebar-buttonbox-container){
+  opacity: 0;
+  pointer-events: none;
+}
+:root[tabsintitlebar] #toolbar-menubar[inactive]{
+  margin-bottom: calc(0px - var(--uc-toolbar-height));
+}
+
+#TabsToolbar > .titlebar-buttonbox-container,
+.titlebar-spacer[type="post-tabs"]{
+  display: none;
+}
+#TabsToolbar{
+  margin-right: var(--uc-navigationbar-width);
+  --tabs-navbar-shadow-size: 0px;
+}
+
+#tabbrowser-tabs{
+  --tab-min-height: calc(var(--uc-toolbar-height) - 2 * var(--tab-block-margin,0px)) !important;
+}
+
+#toolbar-menubar[autohide="true"] > .titlebar-buttonbox-container{
+  min-height: var(--uc-toolbar-height) !important
+}
+#tabbrowser-tabs,
+.tabbrowser-tab[pinned]{
+  min-height: var(--tab-min-height) !important;
+}
+#nav-bar{
+  margin-left: calc(100vw - var(--uc-navigationbar-width));
+  margin-top: calc(0px - var(--uc-toolbar-height));
+  background-color: #0000 !important;
+}
+
+/* Override style set in window_control_placeholder_support.css  */
+#nav-bar{ border-left-width: 0px !important }
+#nav-bar::before{ display:none !important }
+
+/* Rules specific to window controls on left layout */
+@media (-moz-bool-pref: "userchrome.force-window-controls-on-left.enabled"),
+       (-moz-platform: macos),
+       (-moz-gtk-csd-reversed-placement){
+  :root:not([inFullscreen]) #TabsToolbar-customization-target > .titlebar-spacer[type="pre-tabs"]{
+    width: var(--uc-window-drag-space-post) !important;
+    display: flex !important; 
+  }
+  #TabsToolbar > .titlebar-buttonbox-container{
+    display: flex;
+  }
+}
+
+/* 1px margin on touch density causes tabs to be too high */
+.tab-close-button{ margin-top: 0 !important }
+
+/* Make opened urlbar overlay the toolbar */
+#urlbar[open]:focus-within{
+  min-width: var(--uc-urlbar-min-width,none) !important;
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* Hide dropdown placeholder */
+#urlbar-container:not(:hover) .urlbar-history-dropmarker{ margin-inline-start: -28px; }
+
+/* Fix customization view */
+#customization-panelWrapper > .panel-arrowbox > .panel-arrow{ margin-inline-end: initial !important; }
+
+
+
+
+
+
+
+
+
+
+
 
 /*  Removes urlbar border/background  */
 #urlbar-background {
@@ -136,17 +250,6 @@ font-size: 8pt !important;
   border: none !important;
   background: -moz-Dialog !important;
 }
-
-/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/minimal_in-UI_scrollbars.css made available under Mozilla Public License v. 2.0*/
-/* Changes various in-UI scrollabars to be slim and more subtle */
-.panel-subview-body,
-#permList,
-scrollbar{
- color: inherit;
- scrollbar-color: currentColor transparent;
- scrollbar-width: thin 
-}
-
 
 /* =================TABS================= */
 
@@ -274,13 +377,20 @@ scrollbar{
     display: -moz-box !important;
 }
 
-#tabs-newtab-button > .toolbarbutton-icon{ padding: 9px 9px 11px 11px !important; }
-
-/* =================URL BAR================= */
 
 #urlbar:not([focused]) #urlbar-input, /* ID for Firefox 70 */
 #urlbar:not([focused]) .urlbar-input{
   text-align: left !important;
+}
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/minimal_in-UI_scrollbars.css made available under Mozilla Public License v. 2.0*/
+/* Changes various in-UI scrollabars to be slim and more subtle */
+.panel-subview-body,
+#permList,
+scrollbar{
+ color: inherit;
+ scrollbar-color: currentColor transparent;
+ scrollbar-width: thin 
 }
 
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_urlbar_megabar.css made available under Mozilla Public License v. 2.0
@@ -385,8 +495,7 @@ menupopup{
 .bookmark-item:not(#bookmarks-menu-button) > .toolbarbutton-icon {
   width: 12px !important;
   height: 12px !important;
-  filter: grayscale(50%);
-  margin-right: 1px;
+  filter: grayscale(85%);
  }
 
 #back-button,
@@ -398,3 +507,5 @@ menupopup{
 #new-tab-button {
   scale: 80%;
 }
+
+#tabs-newtab-button > .toolbarbutton-icon{ padding: 9px 9px 11px 11px !important; }
