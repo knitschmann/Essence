@@ -1,37 +1,5 @@
-.titlebar-spacer[type="pre-tabs"],
-.titlebar-spacer[type="post-tabs"] {
-  display: none !important;
-}
-
-
-urlbar-container,
-.urlbar-input-box {
-  border: none !important;
-}
-
-#urlbar[pageproxystate="invalid"]:not([usertyping],[searchmode]) #urlbar-input::placeholder{ color: transparent }
-#urlbar[pageproxystate="invalid"]:not([usertyping],[searchmode]) .urlbar-input-box::before{
-  content: "";
-  position: absolute;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  opacity: 0.69;
-  pointer-events: none;
-}
-
-#urlbar {-moz-appearance: none !important;
-font-family: Helvetica !important;
-font-size: 8pt !important; 
-}
-
-#urlbar, #urlbar-container {
-  min-width: 150px !important;
-  max-width: 150px !important;
-  padding-block: 0 !important;
-}
-
-/* Menu button */
+/* =================UI ELEMENTS================= */
+/* Hide Menu button */
 #PanelUI-button {
   -moz-box-ordinal-group: 0 !important;
   order: -2 !important;
@@ -59,7 +27,7 @@ font-size: 8pt !important;
   size: 1px !important;
 }*/
 
-/* All tabs (v-like) button */
+/* Hide All tabs (v-like) button */
 #alltabs-button {
   display: none !important
 }
@@ -89,6 +57,62 @@ font-size: 8pt !important;
   padding-inline: 0 !important;
 }
 
+/* Remove fullscreen warning border */
+#fullscreen-warning {
+  border: none !important;
+  background: -moz-Dialog !important;
+}
+
+/*Reduce size of Bookmark Toolbar icons to distinguish from Bookmarks Button and also grant more space for tabs*/
+.bookmark-item:not(#bookmarks-menu-button) > .toolbarbutton-icon {
+  width: 12px !important;
+  height: 12px !important;
+  filter: grayscale(25%);
+  margin-right: 1px;
+ }
+
+#back-button,
+#stop-reload-button,
+#unified-extensions-button{
+  scale: 94%;
+}
+
+#new-tab-button {
+  scale: 80%;
+}
+
+/* Context Menu Colors */
+menupopup{
+  --menuitem-hover-background-color: #e0e0e6 !important;
+  --menu-background-color: #f9f9fb !important;
+  --menu-color: #15141a !important;
+  --menuitem-disabled-hover-background-color: rgba(224, 224, 230, 0.4) !important;
+  --menu-disabled-color: rgba(21, 20, 26, 0.4) !important;
+  --menu-border-color: #cfcfd8!important;
+  --menu-icon-opacity: 0.7 !important;
+}
+
+/* add to bookmark popup and bookmark lists menu color */
+:root {
+  --bookmark-block-padding: 4px 6px !important;
+  --arrowpanel-menuitem-padding: 2px 8px !important;
+  --tab-block-margin: 0px !important;
+  --tab-border-radius: 0px !important;
+  --arrowpanel-border-radius: 0px !important;
+  --arrowpanel-padding-inline: 2px !important;
+  /* all menu color override except context menu */
+  --arrowpanel-background: rgba(28, 27, 34, 1) !important;
+  --arrowpanel-color: #fafafa !important;
+  --arrowpanel-hover-background-color: #333 !important;
+  --arrowpanel-disabled-hover-background-color: #333 !important;
+  --arrowpaenl-disabled-color: #555 !important;
+  --arrowpanel-border-color: #333 !important;
+  --arrowpanel-icon-opacity: 0.7 !important;
+  --chrome-content-separator-color: #1C1B22 !important;
+}
+
+
+/* =================LAYOUT - ONE LINE================= */
 /* Navbar size calc */
 :root{
 --3tab-border-radius: 6px !important; /*  Tab border radius -- Changes the tabs rounding  *//*  Default: 6px  */
@@ -107,38 +131,12 @@ font-size: 8pt !important;
 {:root #nav-bar{padding: 0 5px 0 5px!important; height: calc(var(--NavbarHeightSmall) * 1px) !important} toolbarspring{display: none !important;} #TabsToolbar, #nav-bar{transition: margin-top .25s !important}}
 #nav-bar, #PersonalToolbar{background-color: #0000 !important;background-image: none !important; box-shadow: none !important} #nav-bar{margin-left: 3px;} .tab-background, .tab-stack { min-height: calc(var(--TabsHeight) * 1px) !important}
 
-/*  Removes urlbar border/background  */
-#urlbar-background {
-  border: none !important;
-  outline: none !important;
-  transition: .15s !important;
-}
-
-/*  Removes the background from the urlbar while not in use  */
-#urlbar:not(:hover):not([breakout][breakout-extend]) {
-    > #urlbar-background {
-        box-shadow: none !important;
-        background: #0000 !important;
-    }
-}
-
-#navigator-toolbox {
-    border: none !important
-}
-
 /* Fades window while not in focus */
 #navigator-toolbox-background:-moz-window-inactive {
   filter: contrast(75%)
 }
 
-/* Remove fullscreen warning border */
-#fullscreen-warning {
-  border: none !important;
-  background: -moz-Dialog !important;
-}
-
-/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/minimal_in-UI_scrollbars.css made available under Mozilla Public License v. 2.0*/
-/* Changes various in-UI scrollabars to be slim and more subtle */
+/* Changes various in-UI scrollabars to be slim and more subtle https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/minimal_in-UI_scrollbars.css*/
 .panel-subview-body,
 #permList,
 scrollbar{
@@ -149,7 +147,6 @@ scrollbar{
 
 
 /* =================TABS================= */
-
 /* Multiaccount Container Identifier Color - Glowing line at bottom. */
 .tabbrowser-tab > .tab-stack > .tab-background > .tab-context-line
 {
@@ -159,16 +156,13 @@ scrollbar{
   margin: 31px var(--tab-border-radius) 0px !important;
   box-shadow: -30px 15px 50px 1px var(--identity-icon-color) !important;
 }
-
 .tabbrowser-tab:not(:pinned):not([visuallyselected], [multiselected]) {
     min-width: 100px !important;
 }
-
 .tabbrowser-tab:not(:hover):not([visuallyselected], [multiselected]) {
     transition: .1s !important;
     filter: opacity(35%) !important;
 }
-
 #TabsToolbar #firefox-view-button[open] > .toolbarbutton-icon, .tabbrowser-tab:is([visuallyselected], [multiselected]) {
     background: none !important;
     filter: none !important;
@@ -180,65 +174,41 @@ scrollbar{
         border-bottom-left-radius: 0 !important;
     }
 }
-
 .tabbrowser-tab:hover .tab-background {
     background: none !important;
     min-width: 30px !important; /* Adjust the width as needed */
 }
 
-/* remove gap after pinned tabs */
+/* remove gap before (left) pinned tabs */
+.titlebar-spacer[type="pre-tabs"],
+.titlebar-spacer[type="post-tabs"] {
+  display: none !important;
+}
+
+/* remove gap after (right) pinned tabs */
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])
   > #tabbrowser-arrowscrollbox
   > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) { margin-inline-start: 0 !important; 
 }
 
+/* tab default size a little smaller than default */
+.tabbrowser-tab[fadein]:not([pinned]):not([style*="max-width"])
+{
+  max-width: 150px !important;
+}
+
 /* show favicon when media is playing but tab is hovered */
 .tab-icon-image:not([pinned]) { opacity: 1 !important; }
-
 .tab-label {
-    /* font-family: Helvetica bold !important;  */
     font-size: 12px !important; /* Adjust the font size as needed */
 }
 
-/* Makes the speaker icon to always appear if the tab is playing (not only on hover) */
-.tab-icon-overlay:not([crashed]),
-.tab-icon-overlay[pinned][crashed][selected] {
-
-  top: 5px !important;
-  z-index: 1 !important;
-
-  padding: 1.5px !important;
-  inset-inline-end: -8px !important;
-  width: 16px !important; height: 16px !important;
-
-  border-radius: 10px !important;
-} 
-
 .tabbrowser-tab:not([image]) .tab-icon-overlay:not([pinned], [sharing], [crashed]) {
-
   top: 0 !important;
-
   padding: 0 !important;
   margin-inline-end: 5.5px !important;
   inset-inline-end: 0 !important;
-
 }
-
-/* style and position speaker icon */
-.tab-icon-overlay:not([sharing], [crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
-
-  stroke: transparent !important;
-  background: transparent !important;
-  opacity: 1 !important; fill-opacity: 0.8 !important;
-
-  color: currentColor !important;
-
-  stroke: var(--toolbar-bgcolor) !important;
-  background-color: var(--toolbar-bgcolor) !important;
-
-  margin-right: 15px !important;
-} 
-
 
 /*  Tabs close button  */
 .tabbrowser-tab:not(:hover) .tab-close-button {
@@ -277,23 +247,37 @@ scrollbar{
 #tabs-newtab-button > .toolbarbutton-icon{ padding: 9px 9px 11px 11px !important; }
 
 /* =================URL BAR================= */
-
-#urlbar:not([focused]) #urlbar-input, /* ID for Firefox 70 */
-#urlbar:not([focused]) .urlbar-input{
-  text-align: left !important;
+/* urlbar remove default search text from input field */
+#urlbar[pageproxystate="invalid"]:not([usertyping],[searchmode]) #urlbar-input::placeholder{ color: transparent }
+#urlbar[pageproxystate="invalid"]:not([usertyping],[searchmode]) .urlbar-input-box::before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0.69;
+  pointer-events: none;
 }
 
-/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_urlbar_megabar.css made available under Mozilla Public License v. 2.0
-See the above repository for updates as well as full license text. */
-/* Make urlbar appear more compact */
+/* urlbar font and styling */
+#urlbar {-moz-appearance: none !important;
+font-family: Helvetica !important;
+font-size: 8pt !important; 
+}
+
+/* urlbar container sizing so it does not wrap around and blocks the close button */
+#urlbar, #urlbar-container {
+  min-width: 150px !important;
+  max-width: 150px !important;
+  padding-block: 0 !important;
+}
+
+/* Make urlbar appear more compact https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_urlbar_megabar.css */
 #urlbar[breakout]{
   margin-inline-start: 0px !important;
   width: 100% !important;
   left: 0 !important;
   top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2 ) !important;
-}
-#urlbar[breakout]:not([open]){
-  bottom: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 .urlbarView{
   margin-inline: 0 !important;
@@ -319,30 +303,8 @@ See the above repository for updates as well as full license text. */
   padding-block: 0px !important;
 }
 
-/* Make urlbar popup appear full size like it did before urlbar re-design */
-.urlbarView-row-inner{
-   /* This sets how far the dropdown-items are from window edge */
-  padding-inline-start: 6px !important;
-}
 
 /* for some reason this is needed to disable URLBAR border */
-}
-
-#urlbar[focused]{ 
-  box-shadow: inset 0 0 0 1px var(--toolbar-field-focus-border-color, highlight);
-  border: none !important;
-}
-
-.urlbarView{
-  position: absolute !important;
-  margin: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  border-width: 1px 0;
-  top: var(--urlbar-container-height);
-  background-color: var(--toolbar-field-focus-background-color, inherit);
-  z-index: 4;
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
 }
 
 #urlbar > .urlbar-input-container{ padding: 0px !important; width: auto !important; height: auto !important; }
@@ -351,50 +313,3 @@ See the above repository for updates as well as full license text. */
 /* This may seem pretty weird, but it gets around an issue where the height of urlbar may suddenly change when one starts typing into it */
 /* If you are otherwise modifying the urlbar height then you might need to modify the height of this too */
 #urlbar > .urlbar-input-container::before{ content: ""; display: flex; height: 24px; }
-
-/* Context Menu Colors */
-menupopup{
-  --menuitem-hover-background-color: #e0e0e6 !important;
-  --menu-background-color: #f9f9fb !important;
-  --menu-color: #15141a !important;
-  --menuitem-disabled-hover-background-color: rgba(224, 224, 230, 0.4) !important;
-  --menu-disabled-color: rgba(21, 20, 26, 0.4) !important;
-  --menu-border-color: #cfcfd8!important;
-  --menu-icon-opacity: 0.7 !important;
-}
-
-/* add to bookmark popup and bookmark lists menu color */
-:root {
-  --bookmark-block-padding: 4px 6px !important;
-  --arrowpanel-menuitem-padding: 2px 8px !important;
-  --tab-block-margin: 0px !important;
-  --tab-border-radius: 0px !important;
-  --arrowpanel-border-radius: 0px !important;
-  --arrowpanel-padding-inline: 2px !important;
-  /* all menu color override except context menu */
-  --arrowpanel-background: rgba(28, 27, 34, 1) !important;
-  --arrowpanel-color: #fafafa !important;
-  --arrowpanel-hover-background-color: #333 !important;
-  --arrowpanel-disabled-hover-background-color: #333 !important;
-  --arrowpaenl-disabled-color: #555 !important;
-  --arrowpanel-border-color: #333 !important;
-  --arrowpanel-icon-opacity: 0.7 !important;
-}
-
-/*Reduce size of Bookmark Toolbar icons to distinguish from Bookmarks Button and also grant more space for tabs*/
-.bookmark-item:not(#bookmarks-menu-button) > .toolbarbutton-icon {
-  width: 12px !important;
-  height: 12px !important;
-  filter: grayscale(50%);
-  margin-right: 1px;
- }
-
-#back-button,
-#stop-reload-button,
-#unified-extensions-button{
-  scale: 94%;
-}
-
-#new-tab-button {
-  scale: 80%;
-}
