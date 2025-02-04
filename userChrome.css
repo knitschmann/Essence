@@ -197,10 +197,15 @@ scrollbar{
   max-width: 150px !important;
 }
 
-/* show favicon when media is playing but tab is hovered */
-.tab-icon-image:not([pinned]) { opacity: 1 !important; }
-.tab-label {
-    font-size: 12px !important; /* Adjust the font size as needed */
+/* Audio Media Play Mute Button */
+/* https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/overlay_tab_audio_icons.css/ */
+/* https://www.reddit.com/r/FirefoxCSS/comments/1hlwovk/css_for_speaker_iconmute/ */
+.tab-icon-stack:is([soundplaying], [muted])[indicator-replaces-favicon] > .tab-icon-image:not([busy]) {
+  display: none;
+  
+  ~ .tab-icon-overlay {
+    opacity: 1 !important;
+  }
 }
 
 .tabbrowser-tab:not([image]) .tab-icon-overlay:not([pinned], [sharing], [crashed]) {
