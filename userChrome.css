@@ -198,58 +198,21 @@ scrollbar{
 }
 
 /* Audio Media Play Mute Button */
-/* https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/overlay_tab_audio_icons.css/ */
-/* https://www.reddit.com/r/FirefoxCSS/comments/1hlwovk/css_for_speaker_iconmute/ */
-.tab-icon-stack:is([soundplaying], [muted])[indicator-replaces-favicon] > .tab-icon-image:not([busy]) {
-  display: none;
-  
-  ~ .tab-icon-overlay {
-    opacity: 1 !important;
-  }
-}
+/* not used but nice-to-know: https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/overlay_tab_audio_icons.css/ */
+/* current usage: https://www.reddit.com/r/FirefoxCSS/comments/1j3idx8/how_to_revert_to_the_previous_audio_icon_again/ */
+/* hide favicon when audio is playing (like FF 135) */
+#tabbrowser-tabs:is([orient="vertical"][expanded], [orient="horizontal"]) .tabbrowser-tab:not([pinned]):not([crashed]):is([soundplaying], [muted], [activemedia-blocked]) {
+    .tab-content .tab-icon-image {
+        display: none;
+    }
 
-.tabbrowser-tab:not([image]) .tab-icon-overlay:not([pinned], [sharing], [crashed]) {
-  top: 0 !important;
-  padding: 0 !important;
-  margin-inline-end: 5.5px !important;
-  inset-inline-end: 0 !important;
+    .tab-audio-button {
+        --button-size-icon-small: 18px !important;
+        --button-min-height-small: 16px !important;
+        margin: auto 4.5px auto -1px !important;
+        transform: translateY(-2px);
+    }
 }
-
-/*  Tabs close button  */
-.tabbrowser-tab:not(:hover) .tab-close-button {
-    opacity: 0% !important;
-    transition: 0.3s !important;
-    display: -moz-box !important;
-}
-.tab-close-button[selected]:not(:hover) {
-    opacity: 45% !important;
-    transition: 0.3s !important;
-    display: -moz-box !important;
-    background: none !important;
-}
-.tabbrowser-tab:hover .tab-close-button {
-    opacity: 50%;
-    transition: 0.3s !important;
-    background: none !important;
-    cursor: pointer;
-    display: -moz-box !important;
-}
-.tab-close-button:hover {
-    opacity: 100% !important;
-    transition: 0.3s !important;
-    background: none !important;
-    cursor: pointer;
-    display: -moz-box !important;
-}
-.tab-close-button[selected]:hover {
-    opacity: 100% !important;
-    transition: 0.3s !important;
-    background: none !important;
-    cursor: pointer;
-    display: -moz-box !important;
-}
-
-#tabs-newtab-button > .toolbarbutton-icon{ padding: 9px 9px 11px 11px !important; }
 
 /* =================URL BAR================= */
 /* urlbar remove default search text from input field */
