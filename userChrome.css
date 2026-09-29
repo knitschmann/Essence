@@ -32,6 +32,13 @@
   display: none !important
 }
 
+/* HIDE PIN TO TASKBAR ICON  */
+
+#urlbar .urlbar-page-action#taskbar-tabs-button,
+#urlbar hbox#taskbar-tabs-button.urlbar-page-action {
+  display: none !important;
+}
+
 /* Hide Extension name inside URL bar */
 #identity-box.extensionPage #identity-icon-label {
   visibility: collapse !important
@@ -50,11 +57,18 @@
   display: none !important
 }
 
-/* Do not technically hide the bookmark star so that context menu popup still works*/
-#star-button-box{
-  width: 0.1px !important;
-  overflow: hidden !important;
-  padding-inline: 0 !important;
+/* Hide the bookmark star icon by default */
+#star-button-box {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s;
+}
+
+/* Show the star icon when hovering the URL bar or the star itself */
+#urlbar:hover #star-button-box,
+#star-button-box:hover {
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* Remove fullscreen warning border */
@@ -153,8 +167,8 @@ scrollbar{
   background-color: var(--identity-icon-color) !important;
   height: 0px !important;
   border-radius: 1px !important;
-  margin: 31px var(--tab-border-radius) 0px !important;
-  box-shadow: -30px 15px 50px 1px var(--identity-icon-color) !important;
+  margin: -7px var(--tab-border-radius) 0px !important;
+  box-shadow: 0px 25px 20px 2px var(--identity-icon-color) !important;
 }
 .tabbrowser-tab:not(:pinned):not([visuallyselected], [multiselected]) {
     min-width: 100px !important;
@@ -241,11 +255,10 @@ font-size: 8pt !important;
 }
 
 /* Make urlbar appear more compact https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_urlbar_megabar.css */
-#urlbar[breakout]{
-  margin-inline-start: 0px !important;
-  width: 100% !important;
-  left: 0 !important;
-  top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2 ) !important;
+#urlbar[breakout][breakout-extend] {
+    margin-left: 0 !important;
+    width: var(--urlbar-width) !important;
+    margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 .urlbarView{
   margin-inline: 0 !important;
@@ -257,10 +270,14 @@ font-size: 8pt !important;
 .urlbarView-row-inner{
   padding-inline-start: 4px !important;
 }
+:where(#urlbar) > .urlbar-background,
 #urlbar-background{
+  background-color: var(--identity-tab-color) !important;
   animation: none !important;
+  outline: none !important;
 }
 .urlbar-input-container{
+  background-color: var(--identity-tab-color) !important;
   padding: 0px 1px !important;
   height: initial !important; 
 }
@@ -272,12 +289,7 @@ font-size: 8pt !important;
 }
 
 
-/* for some reason this is needed to disable URLBAR border */
-}
-
-#urlbar > .urlbar-input-container{ padding: 0px !important; width: auto !important; height: auto !important; }
-#urlbar > #urlbar-background{ display: none !important; }
 
 /* This may seem pretty weird, but it gets around an issue where the height of urlbar may suddenly change when one starts typing into it */
 /* If you are otherwise modifying the urlbar height then you might need to modify the height of this too */
-#urlbar > .urlbar-input-container::before{ content: ""; display: flex; height: 24px; }
+#urlbar > .urlbar-input-container::before{ content: ""; display: flex; height: 30px; }
