@@ -256,9 +256,10 @@ font-size: 8pt !important;
 
 /* Make urlbar appear more compact https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_urlbar_megabar.css */
 #urlbar[breakout][breakout-extend] {
-    margin-left: 0 !important;
-    width: var(--urlbar-width) !important;
-    margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
+  box-shadow: none !important;
+  margin-left: 0 !important;
+  width: var(--urlbar-width) !important;
+  margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
 }
 .urlbarView{
   margin-inline: 0 !important;
@@ -272,7 +273,9 @@ font-size: 8pt !important;
 }
 :where(#urlbar) > .urlbar-background,
 #urlbar-background{
+  border: none !important;
   background-color: var(--identity-tab-color) !important;
+  box-shadow: none !important;
   animation: none !important;
   outline: none !important;
 }
