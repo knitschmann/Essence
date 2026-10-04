@@ -168,7 +168,7 @@ scrollbar{
   height: 0px !important;
   border-radius: 1px !important;
   margin: -7px var(--tab-border-radius) 0px !important;
-  box-shadow: 0px 25px 20px 2px var(--identity-icon-color) !important;
+  box-shadow: 0px 25px 40px 3px var(--identity-icon-color) !important;
 }
 .tabbrowser-tab:not(:pinned):not([visuallyselected], [multiselected]) {
     min-width: 100px !important;
