@@ -158,6 +158,7 @@
 }
 #nav-bar {
     margin-left: 3px;
+    border-top: none !important;
 }
 .tab-background, .tab-stack {
     min-height: calc(var(--TabsHeight) * 1px) !important;
